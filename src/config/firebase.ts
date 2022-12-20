@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
+import { appConfig } from ".";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyClOijiaOqL_DCH2Dnde2NDQWa4u1G9QOw",
+  apiKey: appConfig.apiKey,
   authDomain: "wardenops.firebaseapp.com",
   projectId: "wardenops",
   storageBucket: "wardenops.appspot.com",
@@ -10,8 +11,6 @@ const firebaseConfig = {
   appId: "1:91224184247:web:0ead89846a08628b778432",
   measurementId: "G-F36W6VK48G",
 };
-
-
 function requestPermission() {
   console.log("Requesting permission...");
   Notification.requestPermission().then((permission) => {
@@ -21,8 +20,7 @@ function requestPermission() {
 
       const messaging = getMessaging(app);
       getToken(messaging, {
-        vapidKey:
-          "BO9jwpImWoSAqDih9aU4xT70tibo33wgNVaAbYw8GiWkpzBQEa0hsV2IRZ3LwGhN1FiOWXBP_XVC9rVP7066Ez0",
+        vapidKey: appConfig.vapidKey,
       }).then((currentToken) => {
         if (currentToken) {
           console.log("currentToken: ", currentToken);
